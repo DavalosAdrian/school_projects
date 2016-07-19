@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <title>Javascript Test</title>
+
+  <style>
+      #output, #answer {
+          //background-color: #00ff00;
+          width: 200px;
+          height: auto;
+          margin: -3px 0px 25px;
+          padding: 8px;
+          /*white-space: pre;*/
+          //border: 1px solid #666666;
+          background: #f1f2f3;
+          font-size: 18px;
+      }
+  </style>
+  
+  <script>
+   function game(range, turns) {//game is a function and works with range/turns instead of having variables for them. allows different modes for them after onload using < a href=>(line 75),stockoverflow
+      var random_no= Math.round(( Math.random()*range)); //figure out how to make random numbers Math.random()*10 to make it > 0 //+1 to make whole ##
+      var guess1;
+      var hint ="Guess my number, 1-"+range+"!"; //range set by difficulty level, onload default is set to 5, turns default is 4
+
+      console.log('the secret number is : ' + random_no + '.'); // check ## in console.log
+
+      if(random_no == 0){
+        random_no ++;
+      }//for the random number not to be 0 we added 1 to a coditional statement
+
+      while (turns > 0) {
+          console.log('guess1 : ' + guess1)
+          guess1 = prompt(hint ,"");
+          if (guess1 == random_no)  { //test for the guess.. asks question is it equal
+              hint = "You Win";//hint replaces document.getElementById("output") and will enter it onto output on line 61
+              turns = 0;//turns becomes zero because game has been won. while loop ends
+          }else if(guess1 == ""){// else if makes it into one conditional statement instead of combining them, stockoverflow
+            hint = "You gotta enter something within the blank";
+            hint += " - You have "+turns+" tries left."//hints how many turns are left. it reads right to left storing a new hint
+          }
+          else if (isNaN(guess1)) {
+            hint = "This is not a number...";
+            hint += " - You have "+turns+" tries left."
+          }
+          else if ((guess1 > random_no &&  guess1 >=1 && guess1 <= range) ){
+            hint = "Sorry too high" ;
+            hint += " - You have "+turns+" tries left."
+          }
+          else if ((guess1 < random_no && guess1 != "" &&  guess1 >=1 && guess1 <= range) )    {
+            hint = "Sorry too low";
+            hint += " - You have "+turns+" tries left."
+          }//the&& symbol is condition making it need both statements to be true
+          else if ((guess1 < 1 || guess1 > range) && (guess1 != "")){
+            hint = "Sorry guess is not in range";
+            hint += " - You have "+turns+" tries left."
+          }
+          turns--;
+          document.getElementById("output").innerHTML = hint;//now hint is posted to page in the output using one line of document.getElementById("output")
+        document.getElementById("answer").innerHTML = random_no;//have to use quotes for function info otherwise it looks for it as a variable, DOM breakpoints
+        }//while ends....for answer to be shown after game has finished has to be outside while loop
+        
+  } //function game()
+
+  </script>
+</head>
+
+<body onload="game(5,4);">
+  output <div id="output"> </div> <!--creates box where hints can be displayed onto the screen.-->
+  answer <div id="answer"> </div>
+
+
+
+</body>
+
+
+
+
+
+</html>

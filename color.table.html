@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title> Color.table</title>
+</head>
+
+
+<style>
+
+    td{
+
+        border-style: solid;
+
+        border-color: #000000;
+
+        color:#5f5f5f;
+
+    }
+
+
+
+</style>
+
+<script>
+
+    var red = 0;
+    var blue = 0;
+    var green = 0;
+
+    document.write('<table>')
+
+    var x;
+    var r;
+
+    for (r=0; r<100; r++){
+      //document.write('<tr>')
+
+      for (g=0; g<100; g++){
+
+        //document.write('<td style= "background-color: rgb('+red+','+green+','+blue+')";>'+red+','+green+','+blue+',</td>')
+        //blue=0 //resets blue at zero otherwise it moves to 257++. still cant get it to delets the 256..
+
+        for (row=0;row<16;row++){
+
+          document.write('<tr>')
+
+          for(x=0;x<16;x++){
+
+            document.write('<td style= "background-color: rgb('+red+','+green+','+blue+')";>'+red+','+green+','+blue+',</td>')
+
+            blue++;
+          }
+
+          //document.write('</tr>')
+        }
+        document.write('</tr>')
+        blue=0
+        green++
+      }
+      //document.write('</tr>')
+      green=0
+      red++
+    }
+      document.write('</table>')
+
+</script>
+
+<body>
+
+
+
+</body>
+
+</html>
